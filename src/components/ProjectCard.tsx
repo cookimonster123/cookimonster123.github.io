@@ -24,6 +24,8 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
           </span>
         ))}
       </div>
+
+      {githubUrl && (
       <a href={githubUrl} 
       className="project-link"
       target="_blank"
@@ -32,6 +34,7 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
         View
         GitHub →
       </a>
+      )}
     </div>
   );
 };
