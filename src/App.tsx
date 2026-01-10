@@ -5,6 +5,7 @@ import { Projects } from "./sections/Projects";
 import { Experience } from "./sections/Experience";
 import { Skills } from "./sections/Skills";
 import { Contact } from "./sections/Contact";
+import { Introduction } from "./sections/Introduction";
 
 function App() {
   return (
@@ -12,6 +13,7 @@ function App() {
       <ParticlesBackground />
       <Hero />
       <main className="main-content">
+        <Introduction />
         <Projects />
         <Experience />
         <Skills />
