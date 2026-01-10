@@ -11,7 +11,7 @@ export const Introduction: React.FC = () => {
          worked on full-stack web applications using technologies like
          TypeScript, React, Node.js, and Python.
          <br /><br />
-         Outside of coding, I enjoy playing chess, going to the gym, and mixed martial arts
+         Outside of coding, I enjoy playing chess, going to the gym, and shooting film photography.
        </p>
      </Section>
    );
