@@ -10,12 +10,10 @@ export const Hero: React.FC = () => {
           View Projects
         </a>
         <a
-          href="https://github.com/cookimonster123"
+          href="#contact"
           className="btn btn-secondary"
-          target="_blank"
-          rel="noopener noreferrer"
         >
-          GitHub
+          Lets Connect!
         </a>
       </div>
     </section>
