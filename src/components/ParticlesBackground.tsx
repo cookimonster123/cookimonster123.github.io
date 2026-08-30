@@ -41,9 +41,9 @@ export const ParticlesBackground: React.FC = () => {
           number: {
             density: {
               enable: true,
-              area: 1200,
+              area: 1600,
             },
-            value: 40,
+            value: 25,
           },
           opacity: {
             value: 0.5,
