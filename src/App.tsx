@@ -1,11 +1,11 @@
 import "./App.css";
 import { DraggablePhoto } from "./components/DraggablePhoto";
 import { ParticlesBackground } from "./components/ParticlesBackground";
-import photoOne from "./assets/photos/photo1.jpg";
-import photoTwo from "./assets/photos/photo2.jpg";
-import photoThree from "./assets/photos/photo3.jpg";
-import photoFour from "./assets/photos/photo4.jpg";
-import photoFive from "./assets/photos/photo5.jpg";
+import photoOne from "./assets/photos/photo1.jpeg";
+import photoTwo from "./assets/photos/photo2.jpeg";
+import photoThree from "./assets/photos/photo3.jpeg";
+import photoFour from "./assets/photos/photo4.jpeg";
+import photoFive from "./assets/photos/photo5.jpeg";
 import { Hero } from "./sections/Hero";
 import { Projects } from "./sections/Projects";
 import { Experience } from "./sections/Experience";
@@ -42,8 +42,8 @@ function App() {
       <main className="main-content">
         <TicTacToe />
         <Introduction />
-        <Projects />
         <Experience />
+        <Projects />
         <Skills />
         <Contact />
       </main>

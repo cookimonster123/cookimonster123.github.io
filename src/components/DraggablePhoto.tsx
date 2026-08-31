@@ -73,7 +73,14 @@ export const DraggablePhoto: React.FC<DraggablePhotoProps> = ({
       aria-label={alt}
       aria-live="off"
     >
-      <img src={src} alt={alt} draggable={false} />
+      <img
+        src={src}
+        alt={alt}
+        width={300}
+        height={375}
+        decoding="async"
+        draggable={false}
+      />
     </div>
   );
 };
