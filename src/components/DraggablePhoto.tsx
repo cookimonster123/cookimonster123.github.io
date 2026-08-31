@@ -6,6 +6,7 @@ interface DraggablePhotoProps {
   defaultX: number;
   defaultY: number;
   size?: number;
+  onDragEnd?: (didMove: boolean) => void;
 }
 
 export const DraggablePhoto: React.FC<DraggablePhotoProps> = ({
@@ -14,10 +15,13 @@ export const DraggablePhoto: React.FC<DraggablePhotoProps> = ({
   defaultX,
   defaultY,
   size = 160,
+  onDragEnd,
 }) => {
   const [position, setPosition] = useState({ x: defaultX, y: defaultY });
   const [isDragging, setIsDragging] = useState(false);
+  const positionRef = useRef({ x: defaultX, y: defaultY });
   const pointerOffset = useRef({ x: 0, y: 0 });
+  const didMoveRef = useRef(false);
 
   useEffect(() => {
     if (!isDragging) {
@@ -27,12 +31,25 @@ export const DraggablePhoto: React.FC<DraggablePhotoProps> = ({
     const handlePointerMove = (event: PointerEvent) => {
       const nextX = event.clientX - pointerOffset.current.x;
       const nextY = event.clientY - pointerOffset.current.y;
+      const previousX = positionRef.current.x;
+      const previousY = positionRef.current.y;
 
-      setPosition({ x: nextX, y: nextY });
+      if (Math.abs(nextX - previousX) > 4 || Math.abs(nextY - previousY) > 4) {
+        didMoveRef.current = true;
+      }
+
+      const nextPosition = { x: nextX, y: nextY };
+      positionRef.current = nextPosition;
+      setPosition(nextPosition);
     };
 
     const handlePointerUp = () => {
+      const moved = didMoveRef.current;
       setIsDragging(false);
+      if (onDragEnd) {
+        onDragEnd(moved);
+      }
+      didMoveRef.current = false;
     };
 
     window.addEventListener("pointermove", handlePointerMove);
@@ -44,10 +61,12 @@ export const DraggablePhoto: React.FC<DraggablePhotoProps> = ({
       window.removeEventListener("pointerup", handlePointerUp);
       window.removeEventListener("pointercancel", handlePointerUp);
     };
-  }, [isDragging]);
+  }, [isDragging, onDragEnd]);
 
   const handlePointerDown = (event: React.PointerEvent<HTMLDivElement>) => {
     event.preventDefault();
+    didMoveRef.current = false;
+    positionRef.current = position;
 
     const rect = event.currentTarget.getBoundingClientRect();
     pointerOffset.current = {

@@ -1,6 +1,8 @@
+import { useState } from "react";
 import "./App.css";
 import { DraggablePhoto } from "./components/DraggablePhoto";
 import { ParticlesBackground } from "./components/ParticlesBackground";
+import dragHintIcon from "./assets/photos/MultiTouch-Interface-Pixel-theme-Drag-Flick.svg";
 import photoOne from "./assets/photos/photo1.jpeg";
 import photoTwo from "./assets/photos/photo2.jpeg";
 import photoThree from "./assets/photos/photo3.jpeg";
@@ -23,10 +25,25 @@ const photoItems = [
 ];
 
 function App() {
+  const [showDragHint, setShowDragHint] = useState(true);
+
+  const handlePhotoDragEnd = (didMove: boolean) => {
+    if (didMove) {
+      console.info("Photo drag detected — hiding drag hint");
+      setShowDragHint(false);
+    }
+  };
+
   return (
     <div className="app">
       <ParticlesBackground />
       <div className="photo-layer" aria-hidden="true">
+        {showDragHint && (
+          <div className="drag-hint" aria-live="polite">
+            <img src={dragHintIcon} alt="" width={52} height={52} />
+            <span>you can drag the photps</span>
+          </div>
+        )}
         {photoItems.map(({ src, alt, defaultX, defaultY }) => (
           <DraggablePhoto
             key={alt}
@@ -35,6 +52,7 @@ function App() {
             defaultX={defaultX}
             defaultY={defaultY}
             size={150}
+            onDragEnd={handlePhotoDragEnd}
           />
         ))}
       </div>
